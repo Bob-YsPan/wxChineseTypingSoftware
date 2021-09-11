@@ -18,8 +18,13 @@ When I practice Chinese typing a few years ago, I tried to find TQC typing softw
 * wxPython  
 ```pip install wxpython```
 * wxFormBuilder(To modify GUI)
-## How to debug project
-Run ```python ChineseTyping.py```
+## How to debug project(And some files discription)
+* Run ```python ChineseTyping.py``` to run program and debug
+* ```Python_windows_RICH.fbp``` is a layout files build using wxFormBuilder  
+Can use this tool to modify program's Layout, and it will generate file override ```WX_Window.py```
+* ```文章_ANSI.txt```and```文章_UTF8.txt```are example article files. Windows Traditional Chinese version use ANSI encoding, Unix like(macOS、 Linux) use UTF8 encoding
+* ```TQC規範.txt``` is a rules to check user typing(Copied from TQC website)
+* ```string_compare.py``` not included in main program, but contains some compare methods I tried.
 ## Screenshot
 Xfce manjaro dark theme:  
 ![Screenshot1](/scr1.webp)
