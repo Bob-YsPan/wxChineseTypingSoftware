@@ -18,3 +18,5 @@ When I practice Chinese typing a few years ago, I tried to find TQC typing softw
 * wxPython  
 ```pip install wxpython```
 * wxFormBuilder(To modify GUI)
+## How to debug project
+Run ```python ChineseTyping.py```
