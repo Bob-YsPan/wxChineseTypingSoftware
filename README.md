@@ -20,3 +20,6 @@ When I practice Chinese typing a few years ago, I tried to find TQC typing softw
 * wxFormBuilder(To modify GUI)
 ## How to debug project
 Run ```python ChineseTyping.py```
+## Screenshot
+Xfce manjaro dark theme:  
+![Screenshot1](/scr1.webp)
