@@ -42,10 +42,10 @@
             <property name="hidden">0</property>
             <property name="id">wxID_ANY</property>
             <property name="maximum_size"></property>
-            <property name="minimum_size">800,600</property>
+            <property name="minimum_size">1024,600</property>
             <property name="name">MainForm</property>
             <property name="pos"></property>
-            <property name="size">800,600</property>
+            <property name="size">1024,600</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass">; ; forward_declare</property>
             <property name="title">中文打字練習程式</property>
@@ -697,7 +697,7 @@
                         <property name="gripper">0</property>
                         <property name="hidden">0</property>
                         <property name="id">wxID_ANY</property>
-                        <property name="label">按下按鈕開始計時。繳卷請於最後一行完成時按下Enter</property>
+                        <property name="label">按下按鈕開始計時。段落開頭使用全形空格。繳卷請於最後一行完成時按下Enter</property>
                         <property name="markup">0</property>
                         <property name="max_size"></property>
                         <property name="maximize_button">0</property>
@@ -752,10 +752,10 @@
             <property name="hidden">0</property>
             <property name="id">wxID_ANY</property>
             <property name="maximum_size"></property>
-            <property name="minimum_size">800,600</property>
+            <property name="minimum_size">1024,600</property>
             <property name="name">Result_Win</property>
             <property name="pos"></property>
-            <property name="size">800,600</property>
+            <property name="size">1024,600</property>
             <property name="style">wxDEFAULT_DIALOG_STYLE</property>
             <property name="subclass">; ; forward_declare</property>
             <property name="title">測試結果</property>

@@ -18,9 +18,9 @@ import wx.richtext
 class MainForm ( wx.Frame ):
 
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"中文打字練習程式", pos = wx.DefaultPosition, size = wx.Size( 800,600 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"中文打字練習程式", pos = wx.DefaultPosition, size = wx.Size( 1024,600 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 
-		self.SetSizeHints( wx.Size( 800,600 ), wx.DefaultSize )
+		self.SetSizeHints( wx.Size( 1024,600 ), wx.DefaultSize )
 		self.SetForegroundColour( wx.Colour( 0, 0, 0 ) )
 		self.SetBackgroundColour( wx.Colour( 239, 239, 239 ) )
 
@@ -89,7 +89,7 @@ class MainForm ( wx.Frame ):
 
 		mainSizer.Add( self.userRich, 1, wx.EXPAND |wx.ALL, 5 )
 
-		self.End_Info = wx.StaticText( self, wx.ID_ANY, u"按下按鈕開始計時。繳卷請於最後一行完成時按下Enter", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.End_Info = wx.StaticText( self, wx.ID_ANY, u"按下按鈕開始計時。段落開頭使用全形空格。繳卷請於最後一行完成時按下Enter", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.End_Info.Wrap( -1 )
 
 		mainSizer.Add( self.End_Info, 0, wx.ALL, 5 )
@@ -139,9 +139,9 @@ class MainForm ( wx.Frame ):
 class Result_Win ( wx.Dialog ):
 
 	def __init__( self, parent ):
-		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"測試結果", pos = wx.DefaultPosition, size = wx.Size( 800,600 ), style = wx.DEFAULT_DIALOG_STYLE )
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"測試結果", pos = wx.DefaultPosition, size = wx.Size( 1024,600 ), style = wx.DEFAULT_DIALOG_STYLE )
 
-		self.SetSizeHints( wx.Size( 800,600 ), wx.DefaultSize )
+		self.SetSizeHints( wx.Size( 1024,600 ), wx.DefaultSize )
 
 		Sizer = wx.BoxSizer( wx.VERTICAL )
 

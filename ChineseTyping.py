@@ -10,12 +10,13 @@
 import WX_Window
 import wx
 import wx.richtext
-
+from string_compare import string_compare_line
 
 class Mainframe(WX_Window.MainForm):
 
     # Varibles
     remain_time = 600
+    start_time = 600
     start = False
 
     # Init form
@@ -32,7 +33,7 @@ class Mainframe(WX_Window.MainForm):
                 self.artList.Append(art_line.replace('\n', ''))
         except UnicodeDecodeError:
             wx.MessageBox('請使用另一種編碼格式儲存文字檔\n'
-                          '大部分Linux環境下請使用UTF-8編碼\nWindows下請使用Big-5或ANSI編碼', '解碼失敗', wx.OK | wx.ICON_ERROR)
+                          '大部分Linux環境下請使用UTF-8編碼\nWindows下請使用Big-5或記事本ANSI編碼', '解碼失敗', wx.OK | wx.ICON_ERROR)
             err = True
         if not err:
             print('selected')
@@ -108,6 +109,7 @@ class Mainframe(WX_Window.MainForm):
             self.remain_time = 20 * 60
         elif self.timechoice.Selection == 5:
             self.remain_time = 30 * 60
+        self.start_time = self.remain_time
         self.min_Text.LabelText = str(int(self.remain_time / 60)).zfill(2)
         self.sec_Text.LabelText = str(self.remain_time % 60).zfill(2)
 
@@ -116,6 +118,9 @@ class Mainframe(WX_Window.MainForm):
         # 產稱題目跟答案的二維空列表
         user_input = []
         answer_art = []
+        total_incorrect = 0
+        total_need_type = 0
+        total_cleartype = 0
 
         # 實例化結果視窗(以便改寫RichText內容)以及結果變數
         result_form = ResultForm(None)
@@ -133,30 +138,90 @@ class Mainframe(WX_Window.MainForm):
             print('正在取出第' + str(line_no), end='行\n')
             # 取出答案的一行字
             current_line = self.artList.GetString(line_no)
-            # print(current_line)
-            # 命一個該行的空陣列(陣列每一項都是一個字)
-            append_line_list = []
-            # 將每一行的字取出存入陣列
-            for text in current_line:
-                print(text, end='')
-                append_line_list.append(text)
-            answer_art.append(append_line_list)
-            print(answer_art[line_no], end=' length = ')
-            print(len(answer_art[line_no]))
+            answer_art.append(current_line)
 
             # 取出作答的一行字
             current_line = self.userRich.GetLineText(line_no)
-            # print(current_line)
-            # 清空該行的空陣列(陣列每一項都是一個字)
-            append_line_list = []
-            # 將每一行的字取出存入陣列
-            for text in current_line:
-                print(text, end='')
-                append_line_list.append(text)
-            user_input.append(append_line_list)
-            print(user_input[line_no])
+            # 不能是空行，除非是手動交卷
+            if not((current_line == '') and times_up):
+                user_input.append(current_line)
+        print(answer_art)
+        print(user_input)
 
-        # ---Need help here---
+        # 逐行批閱
+        # return：
+        # 0 answer_show = 顯示在richbox的答案行
+        # 1 userin_show = 顯示在richbox的輸入行
+        # 2 mark_index = 需要標顏色的index
+        # 3 err_point = 總扣擊數
+        # 4 correct_type = 正確字數
+        # 5 line_need_text = 須輸入字數
+
+        # 定義一下type，等下要摳數值
+        default_type = wx.richtext.RichTextAttr()
+        default_type = result_form.ResultRich.GetDefaultStyleEx()
+        # 重新定義一下文字大小
+        default_type.SetFontSize(18)
+
+        for line_no in range(max_line):
+            res = []
+            # 使用者來不及打完就不要檢查到最後。
+            if (line_no == max_line - 1) and (times_up):
+                print('times up, dont check to end.')
+                res = string_compare_line(answer_art[line_no], user_input[line_no], True)
+            else:
+                res = string_compare_line(answer_art[line_no], user_input[line_no], False)
+            append_text = res[0] + '\n'
+            append_text = append_text + res[1]
+            result_form.ResultRich.AppendText(append_text)
+            # 吸取剛剛新增文字的格式(尤其顏色)
+            result_form.ResultRich.GetStyleForRange(wx.richtext.RichTextRange(0,1), default_type)
+            # 將格式套正確(以免加後面套新格式被蓋掉)
+            result_form.ResultRich.MoveToLineEnd()
+            cursor_pos = result_form.ResultRich.GetCaretPosition()
+            result_form.ResultRich.SetStyle(cursor_pos - len(append_text) + 1, cursor_pos + 1, default_type)
+            # 移動游標到行首準備上色
+            result_form.ResultRich.MoveToLineStart()
+            cursor_pos = result_form.ResultRich.GetCaretPosition()
+            print('cursor pos = ' + str(cursor_pos))
+            for pos in range(len(res[2])):
+                if res[2][pos]:
+                    result_form.ResultRich.SetStyle(cursor_pos + pos + 1, cursor_pos + pos + 2, wx.TextAttr(wx.RED))
+            # 批閱結果顯示
+            append_text = '\n ^^ 第 ' + str(line_no + 1) + ' 行批閱結果 ^^ \n'
+            append_text = append_text + '淨字數: 正確字數(' + str(res[4]) + ')'
+            remain_correct = res[4] - (res[3] * 0.5)
+            # 淨字數不小於0
+            if remain_correct < 0:
+                remain_correct = 0
+            total_cleartype = total_cleartype + remain_correct  # 淨字數統計
+            append_text = append_text + ' - (錯誤次數(' + str(res[3]) + ') * 0.5) => ' + str(remain_correct)
+            append_text = append_text + ' | 應輸入字數: ' + str(res[5])
+            total_incorrect = total_incorrect + res[3]  # 總錯誤數
+            total_need_type = total_need_type + res[5]  # 應輸入字數
+            result_form.ResultRich.AppendText(append_text)
+            # 套用小字一點的格式
+            current_type = default_type
+            current_type.SetFontSize(12)
+            result_form.ResultRich.MoveToLineEnd()
+            cursor_pos = result_form.ResultRich.GetCaretPosition()
+            result_form.ResultRich.SetStyle(cursor_pos - len(append_text) + 1, cursor_pos + 1, current_type)
+            result_form.ResultRich.AppendText('\n\n')
+        # 結果行顯示
+        append_text = '測驗結果: \n'
+        use_time = self.start_time - self.remain_time
+        append_text = append_text + '用時: ' + str(use_time) + ' 秒\n'
+        append_text = append_text + '平均字數: ' + str(round(total_cleartype / (use_time / 60), 2)) + ' 分鐘/字\n'
+        err_rate = round((total_incorrect / total_need_type) * 100 ,2)
+        append_text = append_text + '錯誤率: ' + str(err_rate) + ' %'
+        if err_rate > 10.0:
+            append_text = append_text + '(無效)'
+        result_form.ResultRich.AppendText(append_text)
+        # 套用黃色字體
+        result_form.ResultRich.MoveToLineEnd()
+        cursor_pos = result_form.ResultRich.GetCaretPosition()
+        default_type.SetFontSize(14)
+        result_form.ResultRich.SetStyle(cursor_pos - len(append_text) + 1, cursor_pos + 1, default_type)
 
         # 結果視窗的顯示方式
         # result_form.ResultRich.AppendText(text)
