@@ -28,7 +28,7 @@ Can use this tool to modify program's Layout, and it will generate file override
 ## Articles Source(文章來源):
 * 文章1.txt > 《將進酒》 李白 | [維基文庫](https://zh.wikisource.org/wiki/%E5%B0%87%E9%80%B2%E9%85%92_(%E6%9D%8E%E7%99%BD))
 * 文章2.txt > 《泰國、越南到臺灣，跨越與塑造邊界的茶》 寒波 (節錄) | [科技大觀園](https://scitechvista.nat.gov.tw/Article/C000003/detail?ID=be45b67b-ae53-4626-966e-e2e8a97475ef)
-* 文章3.txt > 《我的彼得》 徐志摩 | [維基文庫](https://zh.wikisource.org/wiki/%E6%88%91%E7%9A%84%E5%BD%BC%E5%BE%97)
+* 文章3.txt > 《我的彼得》 徐志摩 | [維基文庫](https://zh.wikisource.org/wiki/%E6%88%91%E7%9A%84%E5%BD%BC%E5%BE%97)  
 **如文章有侵權問題，麻煩跟我聯絡一下，我會盡快徹下文章，感謝～**
 ## Screenshot
 Xfce manjaro dark theme:  
