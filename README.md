@@ -30,7 +30,10 @@ Can use this tool to modify program's Layout, and it will generate file override
 * 文章2.txt > 《泰國、越南到臺灣，跨越與塑造邊界的茶》 寒波 (節錄) | [科技大觀園](https://scitechvista.nat.gov.tw/Article/C000003/detail?ID=be45b67b-ae53-4626-966e-e2e8a97475ef)
 * 文章3.txt > 《我的彼得》 徐志摩 | [維基文庫](https://zh.wikisource.org/wiki/%E6%88%91%E7%9A%84%E5%BD%BC%E5%BE%97)  
 **如文章有侵權問題，麻煩跟我聯絡一下，我會盡快徹下文章，感謝～**
-## Screenshot
+## Screenshots
 Xfce manjaro dark theme:  
 ![Screenshot1](/SCR1.webp)  
 ![Screenshot2](/SCR2.webp)  
+  
+Windows 10 21H2:
+![Screenshot3](/SCR3.jpg)  
