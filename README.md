@@ -39,7 +39,7 @@ Windows 10 21H2:
 ![Screenshot3](/SCR3.jpg)  
   
 macOS Mojave dark theme:  
-* **Attention!** macOS may cause some problem like input window not shown  
+* **Attention!** macOS may cause some problems like input window not shown  
 * **注意！** 在 macOS 跑的時候可能會遇到輸入框不會顯示等問題！
   
 ![Screenshot4](/SCR4.png)  
