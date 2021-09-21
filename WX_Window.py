@@ -21,23 +21,23 @@ class MainForm ( wx.Frame ):
 		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"中文打字練習程式", pos = wx.DefaultPosition, size = wx.Size( 1024,600 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 
 		self.SetSizeHints( wx.Size( 1024,600 ), wx.DefaultSize )
-		self.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
+		self.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.SetBackgroundColour( wx.Colour( 36, 36, 36 ) )
 
 		mainSizer = wx.BoxSizer( wx.VERTICAL )
 
 		titleSizer = wx.BoxSizer( wx.HORIZONTAL )
 
 		self.artPicker = wx.FilePickerCtrl( self, wx.ID_ANY, wx.EmptyString, u"選擇文章...", u"*.txt", wx.DefaultPosition, wx.DefaultSize, wx.FLP_DEFAULT_STYLE )
-		self.artPicker.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.artPicker.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
+		self.artPicker.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.artPicker.SetBackgroundColour( wx.Colour( 36, 36, 36 ) )
 		self.artPicker.SetToolTip( u"按我瀏覽檔案" )
 
 		titleSizer.Add( self.artPicker, 1, wx.ALL, 5 )
 
 		self.controlbtn = wx.Button( self, wx.ID_ANY, u"開始測驗", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.controlbtn.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.controlbtn.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNFACE ) )
+		self.controlbtn.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.controlbtn.SetBackgroundColour( wx.Colour( 48, 48, 48 ) )
 		self.controlbtn.Enable( False )
 		self.controlbtn.SetToolTip( u"按下開始測驗" )
 
@@ -49,24 +49,24 @@ class MainForm ( wx.Frame ):
 		self.min_Text = wx.StaticText( self, wx.ID_ANY, u"10", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.min_Text.Wrap( -1 )
 
-		self.min_Text.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.min_Text.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
+		self.min_Text.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.min_Text.SetBackgroundColour( wx.Colour( 36, 36, 36 ) )
 
 		titleSizer.Add( self.min_Text, 0, wx.ALL, 5 )
 
 		self.timeDot_Text = wx.StaticText( self, wx.ID_ANY, u":", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.timeDot_Text.Wrap( -1 )
 
-		self.timeDot_Text.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.timeDot_Text.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
+		self.timeDot_Text.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.timeDot_Text.SetBackgroundColour( wx.Colour( 36, 36, 36 ) )
 
 		titleSizer.Add( self.timeDot_Text, 0, wx.ALL, 5 )
 
 		self.sec_Text = wx.StaticText( self, wx.ID_ANY, u"00", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.sec_Text.Wrap( -1 )
 
-		self.sec_Text.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.sec_Text.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
+		self.sec_Text.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.sec_Text.SetBackgroundColour( wx.Colour( 36, 36, 36 ) )
 
 		titleSizer.Add( self.sec_Text, 0, wx.ALL, 5 )
 
@@ -76,16 +76,16 @@ class MainForm ( wx.Frame ):
 		self.time_staticText = wx.StaticText( self, wx.ID_ANY, u"計時", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.time_staticText.Wrap( -1 )
 
-		self.time_staticText.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.time_staticText.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
+		self.time_staticText.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.time_staticText.SetBackgroundColour( wx.Colour( 36, 36, 36 ) )
 
 		titleSizer.Add( self.time_staticText, 0, wx.ALL, 5 )
 
 		timechoiceChoices = [ u"1分鐘", u"3分鐘", u"5分鐘", u"10分鐘", u"20分鐘", u"30分鐘" ]
 		self.timechoice = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, timechoiceChoices, 0 )
 		self.timechoice.SetSelection( 3 )
-		self.timechoice.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.timechoice.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_WINDOW ) )
+		self.timechoice.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.timechoice.SetBackgroundColour( wx.Colour( 36, 36, 36 ) )
 		self.timechoice.SetToolTip( u"計時器設定" )
 
 		titleSizer.Add( self.timechoice, 0, wx.ALL, 5 )
@@ -96,14 +96,16 @@ class MainForm ( wx.Frame ):
 		artListChoices = []
 		self.artList = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, artListChoices, 0 )
 		self.artList.SetFont( wx.Font( 18, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Noto Sans CJK TC Regular" ) )
-		self.artList.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
+		self.artList.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.artList.SetBackgroundColour( wx.Colour( 18, 18, 18 ) )
 		self.artList.SetToolTip( u"題目" )
 
 		mainSizer.Add( self.artList, 1, wx.ALL|wx.EXPAND, 5 )
 
 		self.userRich = wx.richtext.RichTextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0|wx.VSCROLL|wx.HSCROLL|wx.NO_BORDER|wx.WANTS_CHARS )
 		self.userRich.SetFont( wx.Font( 18, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Noto Sans CJK TC Regular" ) )
-		self.userRich.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
+		self.userRich.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.userRich.SetBackgroundColour( wx.Colour( 18, 18, 18 ) )
 		self.userRich.Enable( False )
 		self.userRich.SetToolTip( u"輸入區" )
 
@@ -112,8 +114,8 @@ class MainForm ( wx.Frame ):
 		self.End_Info = wx.StaticText( self, wx.ID_ANY, u"按下按鈕開始計時。段落開頭使用全形空格。繳卷請於最後一行完成時按下Enter", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.End_Info.Wrap( -1 )
 
-		self.End_Info.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.End_Info.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
+		self.End_Info.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.End_Info.SetBackgroundColour( wx.Colour( 36, 36, 36 ) )
 
 		mainSizer.Add( self.End_Info, 0, wx.ALL, 5 )
 
@@ -165,15 +167,15 @@ class Result_Win ( wx.Dialog ):
 		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"測試結果", pos = wx.DefaultPosition, size = wx.Size( 1024,600 ), style = wx.DEFAULT_DIALOG_STYLE )
 
 		self.SetSizeHints( wx.Size( 1024,600 ), wx.DefaultSize )
-		self.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
+		self.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.SetBackgroundColour( wx.Colour( 36, 36, 36 ) )
 
 		Sizer = wx.BoxSizer( wx.VERTICAL )
 
 		self.ResultRich = wx.richtext.RichTextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0|wx.VSCROLL|wx.HSCROLL|wx.NO_BORDER|wx.WANTS_CHARS )
 		self.ResultRich.SetFont( wx.Font( 18, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Noto Sans CJK TC Regular" ) )
-		self.ResultRich.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.ResultRich.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_WINDOW ) )
+		self.ResultRich.SetForegroundColour( wx.Colour( 238, 238, 238 ) )
+		self.ResultRich.SetBackgroundColour( wx.Colour( 18, 18, 18 ) )
 
 		Sizer.Add( self.ResultRich, 1, wx.EXPAND |wx.ALL, 5 )
 

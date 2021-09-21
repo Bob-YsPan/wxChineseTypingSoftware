@@ -22,6 +22,14 @@ class Mainframe(WX_Window.MainForm):
     # Init form
     def __init__(self, parent):
         WX_Window.MainForm.__init__(self, parent)
+        # 給輸入框設定文字顏色
+        default_type = wx.richtext.RichTextAttr()
+        default_type.SetBackgroundColour(wx.Colour( 18, 18, 18 ))
+        default_type.SetTextColour(wx.Colour( 238, 238, 238 ))
+        default_type.SetFontSize(18)
+        self.userRich.AppendText('init...')
+        self.userRich.SetDefaultStyle(default_type)
+        self.userRich.Clear()
 
     # After pick file
     def artPickerOnFileChanged( self, event ):
@@ -157,11 +165,14 @@ class Mainframe(WX_Window.MainForm):
         # 4 correct_type = 正確字數
         # 5 line_need_text = 須輸入字數
 
-        # 定義一下type，等下要摳數值
+        # 定義一下type，丟一點測試文字再刪掉
         default_type = wx.richtext.RichTextAttr()
-        result_form.ResultRich.AppendText('None.')
-        # 吸取剛剛新增文字的格式(尤其顏色)
-        result_form.ResultRich.GetStyleForRange(wx.richtext.RichTextRange(0,1), default_type)
+        default_type.SetBackgroundColour(wx.Colour( 18, 18, 18 ))
+        default_type.SetTextColour(wx.Colour( 238, 238, 238 ))
+        default_type.SetFontSize(18)
+        result_form.ResultRich.AppendText('init...')
+        result_form.ResultRich.SetDefaultStyle(default_type)
+        # 幫結果框套下顏色
         result_form.ResultRich.Clear()
 
 
@@ -211,7 +222,7 @@ class Mainframe(WX_Window.MainForm):
             current_type = wx.richtext.RichTextAttr()
             current_type.Copy(default_type)
             current_type.SetFontSize(12)
-            current_type.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_WINDOW))
+            current_type.SetBackgroundColour(wx.Colour( 18, 18, 18 ))
             result_form.ResultRich.MoveToLineEnd()
             cursor_pos = result_form.ResultRich.GetCaretPosition()
             result_form.ResultRich.SetStyle(cursor_pos - len(append_text) + 1, cursor_pos + 1, current_type)
