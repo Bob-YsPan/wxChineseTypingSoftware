@@ -22,14 +22,6 @@ class Mainframe(WX_Window.MainForm):
     # Init form
     def __init__(self, parent):
         WX_Window.MainForm.__init__(self, parent)
-        # 給輸入框設定文字顏色
-        default_type = wx.richtext.RichTextAttr()
-        default_type.SetBackgroundColour(wx.Colour( 18, 18, 18 ))
-        default_type.SetTextColour(wx.Colour( 238, 238, 238 ))
-        default_type.SetFontSize(18)
-        self.userRich.AppendText('init...')
-        self.userRich.SetDefaultStyle(default_type)
-        self.userRich.Clear()
 
     # After pick file
     def artPickerOnFileChanged( self, event ):
@@ -51,14 +43,22 @@ class Mainframe(WX_Window.MainForm):
     def controlbtnOnButtonClick(self, event):
         if self.start:
             self.counter_Timer.Stop()
-            self.timechoiceOnChoice(event)
             self.userRich.Clear()
+            self.timechoiceOnChoice(event)
             self.artPicker.Enabled = True
             self.timechoice.Enabled = True
             self.controlbtn.LabelText = '開始測驗'
             self.controlbtn.ToolTip = '按下開始測驗'
             self.userRich.Enabled = False
             self.start = False
+            # 給輸入框設定文字顏色
+            default_type = wx.richtext.RichTextAttr()
+            default_type.SetBackgroundColour(wx.Colour(18, 18, 18))
+            default_type.SetTextColour(wx.Colour(238, 238, 238))
+            default_type.SetFontSize(18)
+            self.userRich.AppendText('init...')
+            self.userRich.SetDefaultStyle(default_type)
+            self.userRich.Clear()
         else:
             self.counter_Timer.Start(1000)
             self.artPicker.Enabled = False
@@ -93,6 +93,7 @@ class Mainframe(WX_Window.MainForm):
     # When finish last line and triggered keyup, ask user to send answer earlier.
     def userRichOnKeyUp( self, event ):
         line_no = self.line_no(self.userRich.GetCaretPosition())
+        if line_no is None: line_no = 0  # 避免第一行字被砍造成例外
         if line_no + 1 > self.artList.GetCount():
             self.counter_Timer.Stop()
             if wx.MessageBox('確定完成？', '', wx.YES_NO | wx.ICON_INFORMATION) == wx.YES:
@@ -150,9 +151,19 @@ class Mainframe(WX_Window.MainForm):
 
             # 取出作答的一行字
             current_line = self.userRich.GetLineText(line_no)
-            # 不能是空行，除非是手動交卷
-            if not((current_line == '') and times_up):
+            # 遇到空行要判斷
+            if current_line == '':
+                # 使用者來不及打的行，就把答案那(最後)行刪掉
+                if line_no == (max_line - 1):
+                    answer_art.pop(line_no)
+                    max_line = max_line - 1
+                else:
+                    # 否則就增加空行
+                    user_input.append('')
+            else:
+                # 否則就新增那行的字
                 user_input.append(current_line)
+                
         print(answer_art)
         print(user_input)
 
@@ -167,8 +178,8 @@ class Mainframe(WX_Window.MainForm):
 
         # 定義一下type，丟一點測試文字再刪掉
         default_type = wx.richtext.RichTextAttr()
-        default_type.SetBackgroundColour(wx.Colour( 18, 18, 18 ))
-        default_type.SetTextColour(wx.Colour( 238, 238, 238 ))
+        default_type.SetBackgroundColour(wx.Colour(18, 18, 18))
+        default_type.SetTextColour(wx.Colour(238, 238, 238))
         default_type.SetFontSize(18)
         result_form.ResultRich.AppendText('init...')
         result_form.ResultRich.SetDefaultStyle(default_type)
@@ -222,7 +233,7 @@ class Mainframe(WX_Window.MainForm):
             current_type = wx.richtext.RichTextAttr()
             current_type.Copy(default_type)
             current_type.SetFontSize(12)
-            current_type.SetBackgroundColour(wx.Colour( 18, 18, 18 ))
+            current_type.SetBackgroundColour(wx.Colour(18, 18, 18))
             result_form.ResultRich.MoveToLineEnd()
             cursor_pos = result_form.ResultRich.GetCaretPosition()
             result_form.ResultRich.SetStyle(cursor_pos - len(append_text) + 1, cursor_pos + 1, current_type)
