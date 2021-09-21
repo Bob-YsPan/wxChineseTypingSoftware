@@ -32,14 +32,22 @@ Can use this tool to modify program's Layout, and it will generate file override
 **如文章有侵權問題，麻煩跟我聯絡一下，我會盡快徹下文章，感謝～**
 ## Screenshots
 Xfce manjaro dark theme:  
-![Screenshot1](/SCR1.webp)  
-![Screenshot2](/SCR2.webp)  
+* **Attention!** Maybe some bug under the wxPython in the Gtk, the line of the article you are typing may not be highlighted correctly.  
+* **注意！** 可能是一些wxPython的Bug，文章正在打的那行可能不會正常被標(上色)出來  
+  
+![Screenshot1](/SCR1.png)  
   
 Windows 10 21H2:
-![Screenshot3](/SCR3.jpg)  
+![Screenshot3](/SCR3.png)  
   
 macOS Mojave dark theme:  
 * **Attention!** macOS may cause some problems like input window not shown  
 * **注意！** 在 macOS 跑的時候可能會遇到輸入框不會顯示等問題！
   
 ![Screenshot4](/SCR4.png)  
+  
+**Bonus!** Windows XP with older python(3.4):  
+![Screenshot5](/SCR5.png)  
+  
+## Portable Version
+I tried to make a portable version under Windows using Pyinstaller, which contains Python 3.4 version built on Windows XP and the Newer python version built on Windows 10. Files can be found in the latest release files.  
