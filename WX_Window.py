@@ -22,7 +22,7 @@ class MainForm ( wx.Frame ):
 
 		self.SetSizeHints( wx.Size( 1024,600 ), wx.DefaultSize )
 		self.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_3DLIGHT ) )
+		self.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
 
 		mainSizer = wx.BoxSizer( wx.VERTICAL )
 
@@ -30,13 +30,14 @@ class MainForm ( wx.Frame ):
 
 		self.artPicker = wx.FilePickerCtrl( self, wx.ID_ANY, wx.EmptyString, u"選擇文章...", u"*.txt", wx.DefaultPosition, wx.DefaultSize, wx.FLP_DEFAULT_STYLE )
 		self.artPicker.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.artPicker.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_3DLIGHT ) )
+		self.artPicker.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
 		self.artPicker.SetToolTip( u"按我瀏覽檔案" )
 
 		titleSizer.Add( self.artPicker, 1, wx.ALL, 5 )
 
 		self.controlbtn = wx.Button( self, wx.ID_ANY, u"開始測驗", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.controlbtn.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
+		self.controlbtn.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNFACE ) )
 		self.controlbtn.Enable( False )
 		self.controlbtn.SetToolTip( u"按下開始測驗" )
 
@@ -49,7 +50,7 @@ class MainForm ( wx.Frame ):
 		self.min_Text.Wrap( -1 )
 
 		self.min_Text.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.min_Text.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_3DLIGHT ) )
+		self.min_Text.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
 
 		titleSizer.Add( self.min_Text, 0, wx.ALL, 5 )
 
@@ -57,7 +58,7 @@ class MainForm ( wx.Frame ):
 		self.timeDot_Text.Wrap( -1 )
 
 		self.timeDot_Text.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.timeDot_Text.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_3DLIGHT ) )
+		self.timeDot_Text.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
 
 		titleSizer.Add( self.timeDot_Text, 0, wx.ALL, 5 )
 
@@ -65,7 +66,7 @@ class MainForm ( wx.Frame ):
 		self.sec_Text.Wrap( -1 )
 
 		self.sec_Text.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.sec_Text.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_3DLIGHT ) )
+		self.sec_Text.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
 
 		titleSizer.Add( self.sec_Text, 0, wx.ALL, 5 )
 
@@ -76,7 +77,7 @@ class MainForm ( wx.Frame ):
 		self.time_staticText.Wrap( -1 )
 
 		self.time_staticText.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.time_staticText.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_3DLIGHT ) )
+		self.time_staticText.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
 
 		titleSizer.Add( self.time_staticText, 0, wx.ALL, 5 )
 
@@ -112,6 +113,7 @@ class MainForm ( wx.Frame ):
 		self.End_Info.Wrap( -1 )
 
 		self.End_Info.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
+		self.End_Info.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
 
 		mainSizer.Add( self.End_Info, 0, wx.ALL, 5 )
 
@@ -164,7 +166,7 @@ class Result_Win ( wx.Dialog ):
 
 		self.SetSizeHints( wx.Size( 1024,600 ), wx.DefaultSize )
 		self.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_CAPTIONTEXT ) )
-		self.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_3DLIGHT ) )
+		self.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
 
 		Sizer = wx.BoxSizer( wx.VERTICAL )
 
