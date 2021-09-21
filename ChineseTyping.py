@@ -159,9 +159,11 @@ class Mainframe(WX_Window.MainForm):
 
         # 定義一下type，等下要摳數值
         default_type = wx.richtext.RichTextAttr()
-        default_type = result_form.ResultRich.GetDefaultStyleEx()
-        # 重新定義一下文字大小
-        default_type.SetFontSize(18)
+        result_form.ResultRich.AppendText('None.')
+        # 吸取剛剛新增文字的格式(尤其顏色)
+        result_form.ResultRich.GetStyleForRange(wx.richtext.RichTextRange(0,1), default_type)
+        result_form.ResultRich.Clear()
+
 
         for line_no in range(max_line):
             res = []
@@ -174,8 +176,8 @@ class Mainframe(WX_Window.MainForm):
             append_text = res[0] + '\n'
             append_text = append_text + res[1]
             result_form.ResultRich.AppendText(append_text)
-            # 吸取剛剛新增文字的格式(尤其顏色)
-            result_form.ResultRich.GetStyleForRange(wx.richtext.RichTextRange(0,1), default_type)
+            # 設定文字大小
+            default_type.SetFontSize(18)
             # 將格式套正確(以免加後面套新格式被蓋掉)
             result_form.ResultRich.MoveToLineEnd()
             cursor_pos = result_form.ResultRich.GetCaretPosition()
@@ -184,9 +186,14 @@ class Mainframe(WX_Window.MainForm):
             result_form.ResultRich.MoveToLineStart()
             cursor_pos = result_form.ResultRich.GetCaretPosition()
             print('cursor pos = ' + str(cursor_pos))
+            # Copy預設值，設定字體格式
+            current_type = wx.richtext.RichTextAttr()
+            current_type.Copy(default_type)
+            current_type.SetBackgroundColour(wx.RED)
+            current_type.SetTextColour(wx.WHITE)
             for pos in range(len(res[2])):
                 if res[2][pos]:
-                    result_form.ResultRich.SetStyle(cursor_pos + pos + 1, cursor_pos + pos + 2, wx.TextAttr(wx.RED))
+                    result_form.ResultRich.SetStyle(cursor_pos + pos + 1, cursor_pos + pos + 2, current_type)
             # 批閱結果顯示
             append_text = '\n ^^ 第 ' + str(line_no + 1) + ' 行批閱結果 ^^ \n'
             append_text = append_text + '淨字數: 正確字數(' + str(res[4]) + ')'
@@ -201,8 +208,10 @@ class Mainframe(WX_Window.MainForm):
             total_need_type = total_need_type + res[5]  # 應輸入字數
             result_form.ResultRich.AppendText(append_text)
             # 套用小字一點的格式
-            current_type = default_type
+            current_type = wx.richtext.RichTextAttr()
+            current_type.Copy(default_type)
             current_type.SetFontSize(12)
+            current_type.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_WINDOW))
             result_form.ResultRich.MoveToLineEnd()
             cursor_pos = result_form.ResultRich.GetCaretPosition()
             result_form.ResultRich.SetStyle(cursor_pos - len(append_text) + 1, cursor_pos + 1, current_type)
@@ -211,17 +220,20 @@ class Mainframe(WX_Window.MainForm):
         append_text = '測驗結果: \n'
         use_time = self.start_time - self.remain_time
         append_text = append_text + '用時: ' + str(use_time) + ' 秒\n'
-        append_text = append_text + '平均字數: ' + str(round(total_cleartype / (use_time / 60), 2)) + ' 分鐘/字\n'
+        append_text = append_text + '平均字數: ' + str(round(total_cleartype / (use_time / 60), 2)) + ' 字/分鐘\n'
         err_rate = round((total_incorrect / total_need_type) * 100 ,2)
         append_text = append_text + '錯誤率: ' + str(err_rate) + ' %'
         if err_rate > 10.0:
             append_text = append_text + '(無效)'
         result_form.ResultRich.AppendText(append_text)
-        # 套用黃色字體
+        # 套用結果字體
         result_form.ResultRich.MoveToLineEnd()
         cursor_pos = result_form.ResultRich.GetCaretPosition()
-        default_type.SetFontSize(14)
-        result_form.ResultRich.SetStyle(cursor_pos - len(append_text) + 1, cursor_pos + 1, default_type)
+        current_type = wx.richtext.RichTextAttr()
+        current_type.Copy(default_type)
+        current_type.SetFontSize(14)
+        current_type.SetFontWeight(wx.FONTWEIGHT_BOLD)
+        result_form.ResultRich.SetStyle(cursor_pos - len(append_text) + 1, cursor_pos + 1, current_type)
 
         # 結果視窗的顯示方式
         # result_form.ResultRich.AppendText(text)
